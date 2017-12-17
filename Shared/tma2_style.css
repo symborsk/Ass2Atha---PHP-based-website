@@ -1,0 +1,186 @@
+
+h1 {
+	font-family: Arial;
+	font-variant: small-caps;
+	text-align : center;
+	font-size : 36px;
+	color : #DFDCE3;
+}
+
+h2 {
+	font-family: Arial;
+	text-align : center;
+	color : #DFDCE3;
+}
+
+h3 {
+	font-family: Arial;
+	text-align : center;
+	color : #DFDCE3;
+}
+
+h4 {
+	font-family: Arial;
+	text-align : center;
+	color : #DFDCE3
+}
+
+h5{
+    font-family: Arial;
+    text-align : center;
+    font-size : 20px;
+}
+
+h6{
+	font-family: Arial; 
+ 	text-align : left;
+    font-size : 14px;
+    color: #F7B733;
+}
+
+hr{
+	border-color: #F7B733;
+	padding: 0px;
+}
+
+body {
+    position: relative;
+    margin: 0;
+    padding-bottom: 96px;
+    min-height: 100%;
+    background-color : #4ABDAC;   
+}
+
+p {
+	color : #DFDCE3;
+	margin-left : 75px;
+	font-family: Arial; 
+}
+
+.navList {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 15%;
+    background-color: #F78733;
+    height: 100%; 
+    position: fixed; 
+    overflow: auto;
+    border-top: 3px solid #FC4A1A;    
+}
+
+.content {
+	margin-left:15%;
+	padding:10px;
+}
+
+.title {
+	font-weight: 1000; 
+	font-family: "Helvetica Neue";
+	font-size: 46px;
+}
+
+li a {
+    height: 30px;
+    display: block;
+    color: #DFDCE3;
+    padding: 8px 16px;
+    text-decoration: none;
+  	border-bottom: 3px solid #FC4A1A;
+  	border-right:3px solid #FC4A1A; 
+  	font-size: 20px;
+  	font-family: Arial; 
+}
+
+li a:hover {
+    background-color: #FC4A1A;
+    color: white;
+}
+
+.modalLogin {
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    padding-top: 60px;
+}
+
+.modalEdit {
+	display: none;
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    padding-top: 60px;
+}
+
+/* Modal Content/Box */
+.modalForm {
+    background-color: #fefefe;
+    margin: 5px auto; /* 15% from the top and centered */
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+    /* Position it in the top right corner outside of the modal */
+    width:25px;
+    height:25px;
+    position: absolute;
+    right: 127px;
+    top: 58px; 
+    color: #000;
+    font-size: 35px;
+    font-weight: bold;
+    text-align: right;
+    vertical-align: top;
+}
+
+.container {
+    padding: 16px;
+}
+
+.errorText{
+	text-align: center;
+	color: red;
+}
+
+form {
+    border: 3px solid #f1f1f1;
+}
+
+input[type=text], input[type=url], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #4ABDAC;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    width: 50%;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
