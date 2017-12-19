@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 
-<?php session_start();?>
+<?
+php session_start();
+?>
 
 <html lang="en">
 <head>
@@ -109,16 +111,41 @@
 
 	<h1 style="text-align:center;">Welcome to Bookmarks Are Us! Your Trusted Source For Bookmarking.</h1>
 	<?php
+		define('DB_HOST', 'localhost');
+		define('DB_NAME', 'sys'); 
+		define('DB_USER','root'); 
+		define('DB_PASSWORD','symbor97');
+
 		if(isset($_SESSION['Username'])){
 			print("<h2>Your Bookmarks</h2>");
+
 		}
 		Else
 		{
-			print("<h2>Our Most Used Bookmarks</h2>");
-		}
+			$con = mysqli_connect(DB_HOST,DB_USER,DB_PASSWORD);
+
+			if (!$con) {
+	    		die('Cannot Connect to MYSQL Server');
+			}
+
+			$db_selected = mysqli_select_db($con, DB_NAME);
+			if (!$db_selected) {
+	   	 		die ('Cant connect to db');
+			}
+
+			print("<h2>Our Most Used Bookmarks</h2><ul class=\"linkList\">");
+			
+			$queryResult = mysqli_query($con, "Select Bookmark, Count(Bookmark) as bookmarkCount from bookmarks GROUP BY Bookmark ORDER BY bookmarkCount DESC limit 10");
+
+			while ($row = mysqli_fetch_assoc($queryResult)){
+				print("<li><a target=\"_blank\" href=\"".$row["Bookmark"] . "\">" . $row["Bookmark"] . "</a></li>");
+			}
+
+			print("</ul>");	
+		}	
 	?>
 
-	<ul>
+	<!-- <ul>
 		<li>
 			<span class="link" style="width:30%">www.lalala.com</span>
 			<span class="editButton" style="margin-left:30%">
@@ -129,7 +156,7 @@
 				<input type="button" onClick="deleteLink('www.lalala.com')" value="Delete"/>
 			</span>
 		</li>
-	</ul>
+	</ul> -->
 	   
 </div>
 
