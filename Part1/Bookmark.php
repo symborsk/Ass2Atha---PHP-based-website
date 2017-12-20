@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 
-<?
-php session_start();
-?>
+
 
 <html lang="en">
 <head>
@@ -14,13 +12,23 @@ php session_start();
 
 <body>
 
+<?php 
+session_start();
+?>
+
 <div>	
 	<nav>
 		<ul class="navList">
-		  <li><a onclick="popLoginForm()" href="#">Sign In</a></li>
-		  <li><a href="news.asp">News</a></li>
-		  <li><a href="contact.asp">Contact</a></li>
-		  <li><a href="about.asp">About</a></li>
+		 <?php 
+			if(isset($_SESSION['Username'])){
+	    		print("<li><a onclick=\"logoutUser()\" href=\"#\">Sign Out</a></li>");
+		    }
+		    else{
+		    	print("<li><a onclick=\"popLoginForm()\" href=\"#\">Sign In</a></li>");
+		    }
+		    ?>
+		  
+		  <li><a href="..\tma2.htm">Home</a></li>
 		</ul>
 	</nav>
 
@@ -41,6 +49,7 @@ php session_start();
 	}
 ?>
 >
+<span class="close" onclick="closeLogin()">&times;</span>
   <form method='post' class="modalForm" action='login.php' >
     <div class="Title">
         <h1 class="title">  
@@ -70,33 +79,33 @@ php session_start();
 
 
 <div id="modalDialogEdit" class="modalEdit">
-  <form method='post' class="modalForm" onsubmit=" return ConfirmNewLink()">
-    <div class="Title">
-        <h1 class="title">  
-	    Bookmarks Are Us
-	    </h1>	   
-    </div>
-    <div id="editErrorText" class="errorText">
+	<span class="close" onclick="closeEditNew()">&times;</span>
+  	<form method='post' class="modalForm" onsubmit=" return ConfirmNewLink()">
+	    <div class="Title">
+	        <h1 class="title">  
+		    Bookmarks Are Us
+		    </h1>	   
+	    </div>
+	    <div id="editErrorText" class="errorText">
 
-    </div>
-    <div class="container">
-	  	<label><b id="currentLinkEdit"></b></label>
-		<input id="newLinkEdit" type="url" name="newLink" required>
-	</div>
-  	<div style="text-align:center;">
-		<button type="submit" name="Edit">Confirm</button>
-	</div>
+	    </div>
+	    <div class="container">
+		  	<label><b id="currentLinkEdit"></b></label>
+			<input id="newLinkEdit" type="url" name="newLink" required>
+		</div>
+	  	<div style="text-align:center;">
+			<button type="submit" name="Edit">Confirm</button>
+		</div>
 </div>
 
 <div class="content" >
 	<header>
-		<h3>Profile: 
-		<?php
+		<h6 style="margin-bottom: 0px"><?php
 			if(isset($_SESSION['Username'])){
-	    		print($_SESSION['Username']);
+	    		print("Profile:" . $_SESSION['Username']);
 	    	}
-		?></h5>
-	    <h1 class="title">  
+		?></h6>
+	    <h1 style="margin-top: 0px" class="title">  
 	    Bookmarks Are Us
 	    </h1>
 	    <h2>
@@ -116,47 +125,50 @@ php session_start();
 		define('DB_USER','root'); 
 		define('DB_PASSWORD','symbor97');
 
+		$con = mysqli_connect(DB_HOST,DB_USER,DB_PASSWORD);
+
+		if (!$con) {
+    		die('Cannot Connect to MYSQL Server');
+		}
+
+		$db_selected = mysqli_select_db($con, DB_NAME);
+		if (!$db_selected) {
+   	 		die ('Cant connect to db');
+		}
+
 		if(isset($_SESSION['Username'])){
-			print("<h2>Your Bookmarks</h2>");
+			$user  = $_SESSION['Username'];
+
+			print("<h2>Your Stored Bookmarks: </h2><ul class=\"linkList\">");
+			
+			$queryResult = mysqli_query($con, "Select Bookmark from bookmarks where Username='" . $user ."'");
+			while ($row = mysqli_fetch_assoc($queryResult)){
+				
+				print("<li><span class=\"link\"><a target=\"_blank\" href=\"". $row["Bookmark"] . "\">" . $row["Bookmark"] . "</a></span>");
+				print("<input type=\"button\" class=\"editButton\" onClick=\"editLink('" . $row["Bookmark"] . "')\" value=\"Edit\"/>");
+				print("<input class=\"deleteButton\" type=\"button\" onClick=\"deleteLink('" . $row["Bookmark"] . "')\" value=\"Delete\"/></li>");
+			}
+			print("</ul>");	
+
+			print("<div style=\"text-align:center;\"><input class=\"addButton\" type=\"button\" onClick=\"addLink()\"  value=\"Add Bookmark\"\></div> ");
 
 		}
 		Else
 		{
-			$con = mysqli_connect(DB_HOST,DB_USER,DB_PASSWORD);
-
-			if (!$con) {
-	    		die('Cannot Connect to MYSQL Server');
-			}
-
-			$db_selected = mysqli_select_db($con, DB_NAME);
-			if (!$db_selected) {
-	   	 		die ('Cant connect to db');
-			}
-
 			print("<h2>Our Most Used Bookmarks</h2><ul class=\"linkList\">");
 			
 			$queryResult = mysqli_query($con, "Select Bookmark, Count(Bookmark) as bookmarkCount from bookmarks GROUP BY Bookmark ORDER BY bookmarkCount DESC limit 10");
 
+			
 			while ($row = mysqli_fetch_assoc($queryResult)){
-				print("<li><a target=\"_blank\" href=\"".$row["Bookmark"] . "\">" . $row["Bookmark"] . "</a></li>");
+				print("<li><a target=\"_blank\" href=\"". $row["Bookmark"] . "\">" . $row["Bookmark"] . "</a></li>");
 			}
 
 			print("</ul>");	
-		}	
+		}
+
+		mysqli_close($con);	
 	?>
-
-	<!-- <ul>
-		<li>
-			<span class="link" style="width:30%">www.lalala.com</span>
-			<span class="editButton" style="margin-left:30%">
-				<input type="button" onClick="editLink('www.lalala.com')" value="Edit"/>
-			</span>
-
-			<span class="deleteButton">
-				<input type="button" onClick="deleteLink('www.lalala.com')" value="Delete"/>
-			</span>
-		</li>
-	</ul> -->
 	   
 </div>
 

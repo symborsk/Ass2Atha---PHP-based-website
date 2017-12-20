@@ -35,9 +35,8 @@ function addBookmarkValue($val){
 	}
 
 	$user = $_SESSION['Username'];
-	$query = mysqli_query($con, "Insert into bookmarks(Username,Bookmark) Value(" . $user . "," . $val . ")");
-
-	mysqli_close($con);
+	$query = mysqli_query($con, "Insert into bookmarks(Username,Bookmark) Value('" . $user . "','" . $val . "')");
+	var_dump($query);
 }
 
 function updateLinkValue($oldValue, $newValue){
@@ -53,7 +52,9 @@ function updateLinkValue($oldValue, $newValue){
 	}
 
 	$user = $_SESSION['Username'];
-	$query = mysqli_query($con, "Update bookmarks Set Bookmark=" . $newValue . " where Bookmark=" . $oldValue . " and Username=" . $user);
+	$query = mysqli_query($con, "Update bookmarks Set Bookmark='" . $newValue . "' where Bookmark='" . $oldValue . "' and Username='" . $user . "'");
+
+	var_dump($query);
 
 	mysqli_close($con);
 }
@@ -71,12 +72,12 @@ function deleteBookmarkValue($delete){
 	}
 
 	$user = $_SESSION['Username'];
-	$query = mysqli_query($con, "Delete from bookmarks where Bookmark=". $delete . " and Username=" . $user;);
+	$query = mysqli_query($con, "Delete from bookmarks where Bookmark='". $delete . "' and Username='" . $user . "'");
 
 	mysqli_close($con);  
 }
 
-php session_start();
+session_start();
 
 if(isset($_GET['link'])){
 	$link=$_GET['link'];
@@ -92,8 +93,17 @@ if(isset($_GET['priorEdit']) and isset($_GET['postEdit'])){
 	updateLinkValue($_GET['priorEdit'],$_GET['postEdit']);
 }
 
+if(isset($_GET['addValue'])){
+	addBookmarkValue($_GET['addValue']);
+}
+
 if(isset($_GET['deleteValue'])){
 	deleteBookmarkValue($_GET['deleteValue']);
+}
+
+if(isset($_GET['logout'])){
+ 	session_destroy();
+    session_unset();
 }
 
 ?>

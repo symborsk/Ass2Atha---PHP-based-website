@@ -6,12 +6,40 @@ function popLoginForm(){
 
 function editLink(link){
 	document.getElementById('modalDialogEdit').style.display='block';
-	document.getElementById('currentLinkEdit').innerHTML = "Changing link: " + link ;
+	document.getElementById('currentLinkEdit').innerHTML = "Changing link: " + link;
+	document.getElementById('editErrorText').innerHTML = ""
 	currentLinkSelected = link;
 }
 
-function addLinkCloseDialog(){
-	
+function addLink(){
+	document.getElementById('modalDialogEdit').style.display='block';
+	document.getElementById('currentLinkEdit').innerHTML = "Adding Link:";
+	document.getElementById('editErrorText').innerHTML =""
+	currentLinkSelected = null;
+}
+
+function closeEditNew(){
+	document.getElementById('modalDialogEdit').style.display='none';
+}
+
+function closeLogin(){
+	document.getElementById('modalDialogLogin').style.display='none';
+}
+
+function logoutUser(){
+    request = new XMLHttpRequest();    
+    request.open("GET", "Validate.php?logout=true", true);
+    request.onreadystatechange = function(){
+	    if (request.readyState == 4) 
+    	{
+	     	if(request.status == 200)
+	     	{
+	     		location.reload();
+	     	}
+    	}
+    }
+
+    request.send();
 }
 
 function ConfirmNewLink(){
@@ -36,7 +64,13 @@ function isWorkingLink(link){
 	     		}
 	     		else
 	     		{
-	     			addLinkCloseDialog();
+	     			if(currentLinkSelected == null){
+	     				addNewLinkCloseDialog();
+	     			}
+	     			else{
+	     				editLinkCloseDialog();
+	     			}
+	     			
 	     		}	     
 	     	}
 	 	}
@@ -45,7 +79,7 @@ function isWorkingLink(link){
  	request.send();
 }
 
-function addLinkCloseDialog(){
+function editLinkCloseDialog(){
 	var priorEdit = currentLinkSelected;
 	var newLink = document.getElementById('newLinkEdit').value;
 
@@ -57,7 +91,51 @@ function addLinkCloseDialog(){
 	    if (request.readyState == 4) 
 	    {
 	     	if(request.status != 200){
-	     		alert(request.responseText);
+	     		alert("Error updating database: " + request.responseText);
+	     	}
+	     	else{
+	     		location.reload();
+	     	}
+	     }
+	 }
+
+	 request.send();
+}
+
+function addNewLinkCloseDialog(){
+	var newLink = document.getElementById('newLinkEdit').value;
+
+	document.getElementById('modalDialogEdit').style.display='none';
+    request = new XMLHttpRequest();    
+    request.open("GET", "Validate.php?addValue=" + newLink, true);
+    request.onreadystatechange = function(){
+
+	    if (request.readyState == 4) 
+	    {
+	     	if(request.status != 200){
+	     		alert("Error updating database: " + request.responseText);
+	     	}
+	     	else{
+	     		location.reload();
+	     	}
+	     }
+	 }
+
+	 request.send();
+}
+
+function deleteLink(link){
+    request = new XMLHttpRequest();    
+    request.open("GET", "Validate.php?deleteValue="+link, true);
+    request.onreadystatechange = function(){
+
+	    if (request.readyState == 4) 
+	    {
+	     	if(request.status != 200){
+	     		alert("Error updating database: " + request.responseText);
+	     	}
+	     	else{
+	     		location.reload();
 	     	}
 	     }
 	 }
