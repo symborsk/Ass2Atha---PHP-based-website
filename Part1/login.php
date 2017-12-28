@@ -69,7 +69,7 @@ function AttemptCreateUser($us, $pas, $connection)
 	}
 	else
 	{
-		$_SESSION['Error'] = "Username already exist please pick a different one";
+		$_SESSION['Error'] = "Username " . $us . " already exist please pick a different one";
 		$_SESSION['ShowForm'] = "True";
 	}
 }

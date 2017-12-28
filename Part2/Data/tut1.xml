@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<TutorialDetails>
+
+	<FigureExplanation>
+		<Header>HTML Tags</Header>
+		<IMGTitle>IMG/htmlTags.png</IMGTitle>
+		<Explanation>
+			Most elements inside of HTML document have a start tag and end tag. The start tags are put inside of angle brackets and the end tag has a forward slash inside
+			of the angle bracket. The exception to this rule are void element that only have start tags but no end tags. An example of this is img tag. Attributes inside of these tags can be used to describe 
+			speicfic qualities of elements. The tags themselves describe the behaviour of the element for example "p" tag would be used for a paragraph whilst the img tag
+			would be used for an image.
+		</Explanation>
+	</FigureExplanation>
+
+	<FigureExplanation>
+		<Header>Floating Elements</Header>
+		<IMGTitle>IMG/FloatingElement.png</IMGTitle>
+		<Explanation>
+					Floating an element allows you to put some content on a certain side of the screen and actually allow you to load content around that element. All the content that is not "floating" will simply load around the floating element. This specific square is a prime example of a floating image with text that loads around the content.
+		</Explanation>
+	</FigureExplanation>
+
+	<List>
+		<Header>Html Page Structure Elements</Header>
+		<ListItems>
+			<Item>Header Element: Used to describe the header area of the page, it often contains one or more heading tags (h1 to h6)</Item>
+			<Item>Footer Element: Used to describe the footer area at the bottom of the page. It will often contain other elements inside it</Item>
+			<Item>Nav Element: This element describes the navigation part of the page. This will typically contain buttons or other elements that allow the user to navigate the website</Item>
+			<Item>Section Element: This essentially marks a section of a page. It is suppose to be used to group together elements that contain some type of relationgship</Item>
+			<Item>Aside Element: Used to describe content that is related to another item. Displays information that is related but not a main detail</Item>
+		</ListItems>
+		<Explanation> These structure element are used in Html5 to provide developers with a cleaner way to layout their page.</Explanation>
+	</List>
+
+	<List>
+		<Header>Relative Length Measurments</Header>
+		<ListItems>
+			<Item>px (pixels) : tiny areas of illuminating, these will vary based on the size of the screen</Item>
+			<Item>em (uppercase M ) : the approximate size of uppercase M on this screen</Item>
+			<Item>ex (lowercase x) : the approximate size of a lowercase x on this screen</Item>
+			<Item>percentages : these make the size a percentage of the default size</Item>
+		</ListItems>
+		<Explanation>Using relative sizes rather then absoloute size are a much better practise as your page will scale properly on different sized screens.</Explanation>
+	</List>
+
+	<List>
+		<Header>Media Types CSS</Header>
+		<ListItems>
+			<Item>Handheld : mobile handheld devices that access the internet eg Tablets, Cellphone, etc.</Item>
+			<Item>Braille : machines that read/print web pages in braille</Item>
+			<Item>Speech : speech synthesizer web browsers</Item>
+			<Item>Print : this media type only affects the web page's appearance when printed</Item>
+		</ListItems>
+		<Explanation>Using "@media [media type]" in your CSS style sheet can allow you to specify types of media for specific styles</Explanation>
+	</List>
+
+	<FigCaption>
+		<Explanation>These inputs do not require any additional code in order to ensure the user input is valid.</Explanation>
+		<IMGTitle>IMG/SelfValidatingInputs.png</IMGTitle>	
+	</FigCaption>
+
+	<FigCaption>
+		<Explanation>A list of common Multipurpose Internet Mail Extensions(MIMEs)</Explanation>
+		<IMGTitle>IMG/commonMIMETypes.png</IMGTitle>
+	</FigCaption>
+</TutorialDetails> 

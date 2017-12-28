@@ -49,8 +49,7 @@ function ConfirmNewLink(){
 	return false;
 }
 
-function isWorkingLink(link){
-    
+function isWorkingLink(link){   
     request = new XMLHttpRequest();    
     request.open("GET", "Validate.php?link="+link, true);
     request.onreadystatechange = function(){
@@ -69,8 +68,7 @@ function isWorkingLink(link){
 	     			}
 	     			else{
 	     				editLinkCloseDialog();
-	     			}
-	     			
+	     			}     			
 	     		}	     
 	     	}
 	 	}

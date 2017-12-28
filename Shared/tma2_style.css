@@ -74,6 +74,15 @@ p {
 	padding:10px;
 }
 
+.mainWindow {
+    margin-left:15%;
+    padding:10px;
+}
+.searchBar{
+    margin-left:15%;
+    padding:10px;
+}
+
 .title {
 	font-weight: 1000; 
 	font-family: "Helvetica Neue";
@@ -81,7 +90,7 @@ p {
 }
 
 li a {
-    height: 30px;
+    height: 40px;
     display: block;
     color: #DFDCE3;
     padding: 8px 16px;
@@ -129,6 +138,12 @@ li a:hover {
     margin: 5px auto; 
     border: 1px solid #888;
     width: 80%; 
+}
+
+.embeddedForm{
+    background-color: #fefefe;
+    border: 1px solid #888;
+    padding: 10px;
 }
 
 /* The Close Button */
@@ -199,11 +214,17 @@ li a:hover {
    height:30px;
 }
 
+.uploadCourse{
+    display: none;
+    margin-left:15%;
+    padding:10px;
+}
+
 form {
     border: 3px solid #f1f1f1;
 }
 
-input[type=text], input[type=url], input[type=password] {
+input[type=text], input[type=url], input[type=password], input[type=file], .courseList {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;

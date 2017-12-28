@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<QuizDetails>
+	
+	<MultipleChoice>
+		<QuestionTitle>The Aside Element is used for what?</QuestionTitle>
+		<OptionList>
+			<Option>Describe content that is unrelated to anything inside of the page</Option>
+			<Option>Describe content that is related to another item but does not fit inside that item</Option>
+			<Option>Describe navigation content that will go beside another item</Option>
+			<Option>None of the above</Option>
+		</OptionList>
+		<Answer>Describe content that is related to another item but does not fit inside that item</Answer>
+	</MultipleChoice>
+
+	<MultipleChoice>
+		<QuestionTitle>What element in HTML5 typically defines the top area of the page?</QuestionTitle>
+		<OptionList>
+			<Option>Header</Option>
+			<Option>Footer</Option>
+			<Option>Section</Option>
+			<Option>Aside</Option>
+		</OptionList>
+		<Answer>Header</Answer>
+	</MultipleChoice>
+
+	<MultipleChoice>
+		<QuestionTitle>What style is useful for loading content around other content?</QuestionTitle>
+		<OptionList>
+			<Option>Floating</Option>
+			<Option>Absoloute Sizing</Option>
+			<Option>Relative Sizing</Option>
+			<Option>Wrapping</Option>
+		</OptionList>
+		<Answer>Floating</Answer>
+	</MultipleChoice>
+
+	<Selection>
+		<QuestionTitle>What is a valid self validating HTML input?</QuestionTitle>
+		<OptionList>
+			<Option>Color</Option>
+			<Option>Video link</Option>
+			<Option>Datetime-UNC</Option>
+			<Option>Datetime-local</Option>
+			<Option>Month</Option>
+			<Option>Year</Option>
+		</OptionList>
+		<Answer>Color,Datetime-local,Month,Year</Answer>
+	</Selection>
+
+	<Selection>
+		<QuestionTitle>What is a valid self validating HTML input?</QuestionTitle>
+		<OptionList>
+			<Option>text/css</Option>
+			<Option>image/jpeg</Option>
+			<Option>text/ajax</Option>
+			<Option>text/html</Option>
+			<Option>text/plain</Option>
+			<Option>image/png</Option>
+		</OptionList>
+		<Answer>text/css,image/jpeg,text/html,text/plain,image/png</Answer>
+	</Selection>
+
+	<TrueFalse>
+		<QuestionTitle>Pixels (px) is an example of an Absoloute Measurment.</QuestionTitle>
+		<Answer>False</Answer>
+	</TrueFalse>
+
+	<TrueFalse>
+		<QuestionTitle>All Html items have a start and end tag.</QuestionTitle>
+		<Answer>False</Answer>
+	</TrueFalse>
+
+	<TrueFalse>
+		<QuestionTitle>Color input in HTML5 requires a hexadecimal input.</QuestionTitle>
+		<Answer>True</Answer>
+	</TrueFalse>
+
+	<TrueFalse>
+		<QuestionTitle>Using relative length measurments is reccomended as will aloow your page to scale better.</QuestionTitle>
+		<Answer>True</Answer>
+	</TrueFalse>
+
+	<TrueFalse>
+		<QuestionTitle>Braille is a valid media type.</QuestionTitle>
+		<Answer>True</Answer>
+	</TrueFalse>
+</QuizDetails>

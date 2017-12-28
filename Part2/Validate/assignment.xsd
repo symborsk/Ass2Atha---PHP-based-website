@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <!-- Definitions -->
+    <xs:element name="Header" type="xs:string"/>
+    <xs:element name="Paragraph" type="xs:string"/>
+
+	<xs:element name="Grouping">
+	    <xs:complexType>
+	        <xs:sequence>
+		     	<xs:element ref="Header"/>
+	            <xs:element ref="Paragraph"/>
+	        </xs:sequence>
+	    </xs:complexType>
+	</xs:element>
+
+	<xs:element name="Assignment">
+    	<xs:complexType>
+	        <xs:sequence>
+		     	<xs:element ref="Grouping" maxOccurs="unbounded"/>
+	        </xs:sequence>
+	    </xs:complexType>
+	</xs:element>
+
+</xs:schema>
+
+
+

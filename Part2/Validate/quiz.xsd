@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <!-- Definitions -->
+    <xs:element name="QuestionTitle" type="xs:string"/>
+    <xs:element name="Answer" type="xs:string"/>
+    <xs:element name="Option" type="xs:string"/>
+
+    <xs:element name="OptionList">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Option" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+ 	<xs:element name="MultipleChoice">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="QuestionTitle"/>
+                <xs:element ref="OptionList"/>
+                <xs:element ref="Answer"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+ 	<xs:element name="Selection">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="QuestionTitle"/>
+                <xs:element ref="OptionList"/>
+                <xs:element ref="Answer"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+ 	<xs:element name="TrueFalse">
+    	<xs:complexType>
+            <xs:sequence>
+                <xs:element ref="QuestionTitle"/>
+                <xs:element ref="Answer"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+ 	<xs:element name="QuizDetails">
+		<xs:complexType>
+            <xs:sequence>
+                <xs:element ref="MultipleChoice" maxOccurs="unbounded"/>
+                <xs:element ref="Selection" maxOccurs="unbounded"/>
+                <xs:element ref="TrueFalse" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+</xs:schema>
