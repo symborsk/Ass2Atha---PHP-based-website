@@ -22,6 +22,6 @@ function uploadContentShow(){
 	document.getElementById('uploadCourse').style.display = 'block';
 	document.getElementById('viewCourseContent').style.display = 'none';
 
-	document.getElementById('MainTitle').innerHTML = "Upload a xml markup and any image that go with it";
-	document.getElementById('SubTitle').innerHTML = "You will need an admin and student password when uploading or creating a new course.";
+	document.getElementById('MainTitle').innerHTML = "Upload a xml markup and any images that go with it";
+	document.getElementById('SubTitle').innerHTML = "You will need an admin and student password when uploading. If creating be sure to remember your admin and student password.";
 }

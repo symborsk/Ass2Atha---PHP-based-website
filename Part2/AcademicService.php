@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 
-<?php session_start();?>
+<?php 
+session_start();
+define('DB_HOST', 'localhost');
+define('DB_NAME', 'sys'); 
+define('DB_USER','root'); 
+define('DB_PASSWORD','symbor97');
+?>
 
 <html>
 
@@ -15,7 +21,7 @@
 		<ul class="navList">
 		  <li><a href="..\tma2.htm">Home</a></li>
 		  <li><a href="#" onclick="courseLoadShow()">Course Load</a></li>
-		  <li><a href ="#" onclick="lastLoadedCourseShow()">Last Loased Course</a></li>
+		  <li><a href ="#" onclick="lastLoadedCourseShow()">Course Material</a></li>
 		  <li><a href="#" onclick="uploadContentShow()">Upload Content</a></li>
 		</ul>
 	</nav>
@@ -41,34 +47,79 @@
 </div>
 
 <div class="mainWindow">
-	<h1 id="MainTitle">Search For Assignments/Quizzes/Lessons</h1>
-	<h2 id="SubTitle">You will need to know the password for the course in order to access it!</h2>
+	<div class="errorText">
+		<?php
+			if(isset($_SESSION['Error'])){
+				print($_SESSION['Error']);
+    			unset($_SESSION['Error']);
+			}
+		?>
+	</div>
 </div>
 
-<div id="courseSearch" class="searchBar">
-	<form method='post' class="embeddedForm" action='courseContent.php' >
-		<label><b>Course Selection</b></label>
-		<select class="courseList" id="courseList">
-			<option value="Math101">Math 101</option>
-			<option value="English101">English 101</option>
-		</select>
+<div id="courseSearch" class="searchBar"
 		<?php
-		?>
+		if(isset($_GET["ShowCourseMaterial"])){
+			print(" style=\"display:none;\"");
+		}
+	?>
+>
+	<h1 id="MainTitle">Search For Assignments/Quizzes/Lessons</h1>
+	<h2 id="SubTitle">You will need to know the password for the course in order to access it!</h2>
+	<form method='post' class="embeddedForm" action='CourseHelper.php' >
+		<label><b>Course Selection</b></label>
+		<select class="courseList" id="courseList" name ="courseListSelection">		
+			<?php
+			$con = mysqli_connect(DB_HOST,DB_USER,DB_PASSWORD);
+			if (!$con ) {
+			    die('Cannot Connect to MYSQL Server');
+			}
+
+			$db_selected = mysqli_select_db($con, DB_NAME);
+			if (!$db_selected) {
+			    die ('Cant connect to db');
+			}
+
+			$result = mysqli_query($con, "Select CourseName from course_login");
+			while ($row = mysqli_fetch_assoc($result)){
+				print("<option value=\"" . $row["CourseName"] . "\">". $row["CourseName"] . "</option>" );
+			}
+
+			?>
+		</select>
 		<label><b>Course Password</b></label>
 		<input type="password" placeholder="Enter a student course password" name="coursePassword" required> 
 	 	<div style="text-align:center;">
-			<button type="submit" name="showContent">Show Content</button>
+			<button type="submit" name="selectCourse">Show Content</button>
 		</div>
 	</form>
 </div>
 
 <div id="uploadCourse" class="uploadCourse">
+	
+	<h1 id="MainTitle">Upload a xml markup and any images that go with it</h1>
+	<h2 id="SubTitle">You will need an admin and student password when uploading. If creating be sure to remember your admin and student password.</h2>
+
 	<form method='post' class="embeddedForm" action='uploadCourse.php' enctype="multipart/form-data" >
 			<label><b>Course Name: </b></label>
 			<input type="text" placeholder="Select existing or enter new course name" name="courseName" list="courses"  required>
 				<datalist id="courses">
-	  				<option>Math 101</option> 
-	  				<option>English 101</option>
+					<?php
+						$con = mysqli_connect(DB_HOST,DB_USER,DB_PASSWORD);
+						if (!$con ) {
+						    die('Cannot Connect to MYSQL Server');
+						}
+
+						$db_selected = mysqli_select_db($con, DB_NAME);
+						if (!$db_selected) {
+						    die ('Cant connect to db');
+						}
+
+						$result = mysqli_query($con, "Select CourseName from course_login");
+						while ($row = mysqli_fetch_assoc($result)){
+							print("<option value=\"" . $row["CourseName"] . "\">". $row["CourseName"] . "</option>" );
+						}
+					?>
 				</datalist>
 
 			<label><b>Unit: </b></label>
@@ -100,44 +151,48 @@
 		 	<div style="text-align:center;">
 					<button type="submit" id="uploadContent" name="uploadContent">Upload Content</button>
 			</div>
+		 	<div style="text-align:center;">
+					<button type="submit" id="createCourse" name="createCourse">Create Course</button>
+			</div>
 	</form>
 </div>
 
-<div id="viewCourseContent">
-		<?php
-		define('DB_HOST', 'localhost');
-		define('DB_NAME', 'sys'); 
-		define('DB_USER','root'); 
-		define('DB_PASSWORD','symbor97');
-
-		$con = mysqli_connect(DB_HOST,DB_USER,DB_PASSWORD);
-
-		if (!$con) {
-    		die('Cannot Connect to MYSQL Server');
+<div id="viewCourseContent" class="viewCourseContent"
+	<?php
+		if(isset($_GET["ShowCourseMaterial"])){
+			print(" style=\"display:block;\"");
 		}
+	?>
+>
 
-		$db_selected = mysqli_select_db($con, DB_NAME);
-		if (!$db_selected) {
-   	 		die ('Cant connect to db');
+	<h1 id="MainTitle">Last Course Loaded</h1>
+	<h2 id="SubTitle">"All the materials of the last course you loaded"</h2>
+	<?php
+	$con = mysqli_connect(DB_HOST,DB_USER,DB_PASSWORD);
+
+	if (!$con) {
+		die('Cannot Connect to MYSQL Server');
+	}
+
+	$db_selected = mysqli_select_db($con, DB_NAME);
+	if (!$db_selected) {
+	 		die ('Cant connect to db');
+	}
+
+	if(isset($_SESSION['Course'])){
+		$course  = $_SESSION['Course'];
+		print("<h2> All material for: " . $course . "</h2><ul class=\"linkList\">");
+
+		$queryResult = mysqli_query($con, "Select ID, Type, CourseUnit from courses where CourseName='" . $course ."'");
+		while ($row = mysqli_fetch_assoc($queryResult)){
+			$link = "LoadCourse.php?ID=" . $row["ID"];
+			$courseDisplay = $row["CourseUnit"] . "-" . $row["Type"];
+
+			print("<li><a target=\"_blank\" href=\"". $link . "\">" . $courseDisplay . "</a></li>");
 		}
-
-		if(isset($_SESSION['Course'])){
-			$course  = $_SESSION['Course'];
-
-			print("<h2>Your Stored Bookmarks: </h2><ul class=\"linkList\">");
-			
-			$queryResult = mysqli_query($con, "Select Bookmark from bookmarks where Username='" . $user ."'");
-			while ($row = mysqli_fetch_assoc($queryResult)){
-				
-				print("<li><span class=\"link\"><a href=\"#\" onclick=\"\">" . $row["Bookmark"] . "</a></span>");
-				print("<input type=\"button\" class=\"editButton\" onClick=\"editLink('" . $row["Bookmark"] . "')\" value=\"Edit\"/>");
-				print("<input class=\"deleteButton\" type=\"button\" onClick=\"deleteLink('" . $row["Bookmark"] . "')\" value=\"Delete\"/></li>");
-			}
-			print("</ul>");	
-
-			print("<div style=\"text-align:center;\"><input class=\"addButton\" type=\"button\" onClick=\"addLink()\"  value=\"Add Bookmark\"\></div> ");
-		}
-		?>
+		print("</ul>");	
+	}
+	?>
 </div>
 
 </body>

@@ -78,6 +78,7 @@ p {
     margin-left:15%;
     padding:10px;
 }
+
 .searchBar{
     margin-left:15%;
     padding:10px;
@@ -214,7 +215,7 @@ li a:hover {
    height:30px;
 }
 
-.uploadCourse{
+.uploadCourse, .viewCourseContent {
     display: none;
     margin-left:15%;
     padding:10px;

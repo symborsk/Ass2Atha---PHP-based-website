@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <!-- Definitions -->
+    <xs:element name="Header" type="xs:string"/>
+    <xs:element name="IMGTitle" type="xs:string"/>
+    <xs:element name="Explanation" type="xs:string"/>
+    <xs:element name="Item" type="xs:string"/>
+
+    <xs:element name="ListItems">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Item" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="FigureExplanation">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Header"/>
+                <xs:element ref="IMGTitle"/>
+                <xs:element ref="Explanation"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="List">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Header"/>
+                <xs:element ref="ListItems"/>
+                <xs:element ref="Explanation"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="FigCaption">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Explanation"/>
+                <xs:element ref="IMGTitle"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="TutorialDetails">
+        <xs:complexType>
+            <xs:sequence>
+                    <xs:element ref="FigureExplanation" maxOccurs="unbounded"/>
+                    <xs:element ref="List" maxOccurs="unbounded"/>
+                    <xs:element ref="FigCaption" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>
