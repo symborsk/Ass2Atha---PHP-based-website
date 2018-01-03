@@ -21,29 +21,127 @@ define('DB_PASSWORD','symbor97');
 		<header>
 		   <?php
 
-		   function BuildAssignment($xml, $content){
-		   		$xmlObject = simplexml_load_string($xml);
-				print_r($xmlObject);
+		   function AddFigureExplanationItem($head, $img, $expl, $contentPath){
+		   		print_r("<p> This is an fig explanation </p>");
+		   }
+
+		   function AddListItem($head, $items, $expl){
+		   		print_r("<p> this is list item </p>");
+		   }
+
+		   function AddFigureCaptionItem($head, $expl, $contentPath){
+   		   		print_r("<p> Fig Caption </p>");
+		   }
+
+		   function AddMultipleChoiceQuestionItem($questionID, $title,  $options){
+   		   		print_r("<div class=MultipleChoice id=\"". $questionID ."\">");
+   		   		print_r("<p><b>" . $title ." (SELECT ONE) </b></p> <ul class=\"Answers\">");
+	   			foreach ($options as &$option){	 
+	   				print_r("<input type=\"radio\" name=\"" . (string)$questionID . "\" value=\"" . $option . "\">" . $option . "<br>");
+	   			}
+
+	   			print_r("</ul></div>");
+		   }
+
+		   function AddSelectionQuestionItem($questionID, $title,  $options){
+   		   		print_r("<p> Selection </p>");
+		   }
+
+		   function AddTrueFalseQuestionItem($questionID, $title){
+   		   		print_r("<p> True False </p>");
+		   }
+
+		   function AddAssignmentGroupingItem($head, $body){
+		   		print_r("<p> Grouping </p>");
+		   }
+
+
+		   function BuildLesson($xml, $content){
+		   		$dom = new DOMDocument;
+				$dom->loadXML($xml);
+				$i = 0;
+
+		 		while(is_object($FigureExplanation = $dom->getElementsByTagName("FigureExplanation")->item($i))){
+        			$Header = "";
+        			$ImgTitle = "";
+        			$Explanation = "";
+
+        			foreach ($FigureExplanation->childNodes as $node){
+        				if($node->nodeName == "Header"){
+        					$Header = $node->nodeValue;
+        				}
+        				elseif($node->nodeName == "IMGTitle"){
+        					$ImgTitle = $node->nodeValue;
+        				}
+        				//This must be explanation
+        				else{
+        					$Explanation = $node->nodeValue;
+        				}
+        			}
+
+        			AddFigureExplanationItem($Header, $ImgTitle, $Explanation, $content);
+        			$i++;
+        		}
+
+				$i = 0;
+		 		while(is_object($List = $dom->getElementsByTagName("List")->item($i))){
+        			$Header = "";
+        			$ListItems = [];
+        			$Explanation = "";
+
+        			foreach ($FigureExplanation->childNodes as $node){
+        				if($node->nodeName == "Header"){
+        					$Header = $node->nodeValue;
+        				}
+        				elseif($node->nodeName == "ListItems"){
+        					foreach($node->childNodes as $ListItem){
+								$ListItems[] = $ListItem;
+        					}
+        				}
+        				//This must be explanation
+        				else{
+        					$Explanation = $node->nodeValue;
+        				}
+        			}
+
+        			AddListItem($Header, $ListItems, $Explanation);
+        			$i++;
+        		}
+
+				$i = 0;
+		 		while(is_object($List = $dom->getElementsByTagName("FigCaption")->item($i))){
+					$ImgTitle = "";
+        			$Explanation = "";
+
+        			foreach ($FigureExplanation->childNodes as $node){
+        				if($node->nodeName == "ImgTitle"){
+        					$ImgTitle = $node->nodeValue;
+        				}
+        				//This must be explanation
+        				else{
+        					$Explanation = $node->nodeValue;
+        				}
+        			}
+
+        			AddFigureCaptionItem($ImgTitle, $Explanation, $content);
+        			$i++;
+        		}
+
 		   }
 
 
 		   function BuildQuiz($xml, $content){
 				$dom = new DOMDocument;
 				$dom->loadXML($xml);
-				$questions = $dom->getElementsByTagName('MultipleChoice');
 				$id = 0;
-				
+			    $i=0;
+
 				//Store all the answers in a session variable so we can use it for marking later
 				$allAnswers = [];
 				
-				foreach ($questions as $question) {
-    				print_r("<h5>" . question)
-				}
-
-			    $i=0;
-        		while(is_object($multipleChoiceQuestion = $doc->getElementsByTagName("MultipleChoice")->item($i))){
+        		while(is_object($multipleChoiceQuestion = $dom->getElementsByTagName("MultipleChoice")->item($i))){
         			$title = "";
-        			$options = [];
+        			$options = array();
 
         			foreach ($multipleChoiceQuestion->childNodes as $node){
         				if($node->nodeName == "QuestionTitle"){
@@ -51,26 +149,31 @@ define('DB_PASSWORD','symbor97');
         				}
         				elseif($node->nodeName == "OptionList"){
         					foreach($node->childNodes as $option){
-        						$options[] = $option;
+        						
+        						//Remove any whitespace nodes
+        						$tempStr = preg_replace('/\s+/', '', $option->nodeValue);
+        						if(strlen($tempStr) != 0){
+        							array_push($options, $option->nodeValue);
+        						}
         					}
         				}
         				//This has to be answer because we validate it using schema
         				else{
-        					$allAnswers[$id] = $nodeValue
+        					$allAnswers[$id] = $node->nodeValue;
         				}
         			}
 
-        			AddMultipleChoiceQuestion($id, $title, $options);
+        			AddMultipleChoiceQuestionItem($id, $title, $options);
         			$id++;
         			$i++;
         		}
 
     		   	$i=0;
-				while(is_object($selectionQuestion = $doc->getElementsByTagName("Selection")->item($i))){
+				while(is_object($selectionQuestion = $dom->getElementsByTagName("Selection")->item($i))){
         			$title = "";
         			$options = [];
         			$answer = "";
-        			foreach ($multipleChoiceQuestion->childNodes as $node){
+        			foreach ($selectionQuestion->childNodes as $node){
         				if($node->nodeName == "QuestionTitle"){
         					$title = $node->nodeValue;
         				}
@@ -81,17 +184,17 @@ define('DB_PASSWORD','symbor97');
         				}
         				//This has to be answer because we validate it using schema
         				else{
-        					$allAnswers[$id] = $nodeValue
+        					$allAnswers[$id] = $node->nodeValue;
         				}
         			}
 
-        			AddSelectionQuestion($id, $title, $options);
+        			AddSelectionQuestionItem($id, $title, $options);
     				$id++;
         			$i++;
         		}
 
     		   	$i=0;
-				while(is_object($trueFalse = $doc->getElementsByTagName("TrueFalse")->item($i))){
+				while(is_object($trueFalse = $dom->getElementsByTagName("TrueFalse")->item($i))){
         			$title = "";
         			$options = [];
         			$answer = "";
@@ -101,20 +204,42 @@ define('DB_PASSWORD','symbor97');
         				}
         				//This has to be answer because we validate it using schema
         				else{
-        					$allAnswers[$id] = $nodeValue
+        					$allAnswers[$id] = $node->nodeValue;
         				}
         			}
 
-        			AddTrueFalseQuestion($id, $title, $options);
+        			AddTrueFalseQuestionItem($id, $title, $options);
     				$id++;
         			$i++;
         		}
 		   }
 
-		   function BuildLesson($xml, $content){
-		   		$xmlObject = simplexml_load_string($xml);
-				print_r($xmlObject);
-		   }
+		   function BuildAssignment($xml, $content){
+				$dom = new DOMDocument;
+				$dom->loadXML($xml);
+			    $i=0;
+
+        		while(is_object($multipleChoiceQuestion = $dom->getElementsByTagName("Grouping")->item($i))){
+        			$Header = "";
+        			$Paragraph = [];
+
+        			foreach ($multipleChoiceQuestion->childNodes as $node){
+        				if($node->nodeName == "Header"){
+        					$tiHeadertle = $node->nodeValue;
+        				}
+        			
+        				//Must be paragraph
+        				else{
+        					$Paragraph = $node->nodeValue;
+        				}
+        			}
+
+        			AddAssignmentGroupingItem($Header, $Paragraph);
+        			$id++;
+        			$i++;
+        		}
+
+		    }	
 
 		   function BuildTitles($Unit, $Type){
 		   	print_r("<h1> Class: " .  $_SESSION['Course'] . "</h1>" );
