@@ -162,9 +162,8 @@ define('DB_PASSWORD','symbor97');
 		if(isset($_GET["ShowCourseMaterial"])){
 			print(" style=\"display:block;\"");
 		}
-	?>
->
-
+	?>>
+	
 	<h1 id="MainTitle">Last Course Loaded</h1>
 	<h2 id="SubTitle">"All the materials of the last course you loaded"</h2>
 	<?php
@@ -186,7 +185,7 @@ define('DB_PASSWORD','symbor97');
 		$queryResult = mysqli_query($con, "Select ID, Type, CourseUnit from courses where CourseName='" . $course ."'");
 		while ($row = mysqli_fetch_assoc($queryResult)){
 			$link = "LoadCourse.php?ID=" . $row["ID"];
-			$courseDisplay = $row["CourseUnit"] . "-" . $row["Type"];
+			$courseDisplay = $row["CourseUnit"] . " - " . $row["Type"];
 
 			print("<li><a target=\"_blank\" href=\"". $link . "\">" . $courseDisplay . "</a></li>");
 		}
