@@ -221,6 +221,78 @@ li a:hover {
     padding:10px;
 }
 
+.MultipleChoice, .TrueFalse, .Selection{
+    border: solid;
+    border-color: #F7B733;
+    overflow: hidden;
+    margin:20px 20px;
+}
+
+.Quiz{
+    border: 4px solid #FC4A1A;
+    padding: 10px;
+    margin:10px;
+}
+
+.Quiz button{
+    background-color: #FC4A1A;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 30%;
+}
+
+.figureExplanation{
+    border: solid;
+    border-color: #FC4A1A;
+    overflow: hidden;
+    margin:20px 20px;
+}
+
+.figureExplanation img{
+    float: right;
+    margin: 10px 10px;
+}
+
+.figureExplanation p{
+    width: 50%;
+    margin: 20px 10px;
+    vertical-align: middle;
+    margin: 20px 50px;
+}
+
+.tutList, .AssignmentGroup{
+    border: solid;
+    border-color: #FC4A1A;
+    overflow: hidden;
+    margin:20px 20px;
+}
+
+.tutList aside{
+    text-align: center;
+    font-size: 16px;
+    margin: 16px 16px;
+}
+
+.figureCaption{
+    border: solid;
+    border-color: #FC4A1A;
+    overflow: hidden;
+    margin:20px 20px;
+}
+
+.figureCaption img{
+    display: block;
+    margin: 0 auto;
+}
+
+.figureCaption figcaption{
+    text-align: center;
+    margin: 10px 10px;
+}
+
 form {
     border: 3px solid #f1f1f1;
 }

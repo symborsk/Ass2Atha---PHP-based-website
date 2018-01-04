@@ -22,19 +22,34 @@ define('DB_PASSWORD','symbor97');
 		   <?php
 
 		   function AddFigureExplanationItem($head, $img, $expl, $contentPath){
-		   		print_r("<p> This is an fig explanation </p>");
+		   		$imgPath =$contentPath . rawurlencode($img); 
+		   		print_r("<div class=figureExplanation>");
+		   		print_r("<img src=" . $imgPath . ">");
+		   		print_r("<h5>" . $head . "</h5>");
+		   		print_r("<p>" . $expl . "</p></div>");
 		   }
 
 		   function AddListItem($head, $items, $expl){
-		   		print_r("<p> this is list item </p>");
+		   		print_r("<div class=tutList>");
+		   		print_r("<h5>" . $head ."</h5> <ul>");
+
+		   		foreach($items as &$item){
+		   			print_r("<li>" . $item->textContent . "</li>");
+		   		}
+
+		   		print_r ("</ul><aside>" . $expl ."</aside></div>");	
 		   }
 
-		   function AddFigureCaptionItem($head, $expl, $contentPath){
-   		   		print_r("<p> Fig Caption </p>");
+		   function AddFigureCaptionItem($imgTitle, $expl, $contentPath){
+   		 		$imgPath = $contentPath . rawurlencode($imgTitle); 
+   		   		
+   		   		print_r("<div class=figureCaption>");
+   		   		print_r("<img src=" . $imgPath . ">");
+   		   		print_r("<figcaption>" . $expl . "</figcaption></div>");
 		   }
 
 		   function AddMultipleChoiceQuestionItem($questionID, $title,  $options){
-   		   		print_r("<div class=MultipleChoice id=\"". $questionID ."\">");
+   		   		print_r("<div class=MultipleChoice id=\"" . $questionID . "\">");
    		   		print_r("<p><b>" . $title ." (SELECT ONE) </b></p> <ul class=\"Answers\">");
 	   			foreach ($options as &$option){	 
 	   				print_r("<input type=\"radio\" name=\"" . (string)$questionID . "\" value=\"" . $option . "\">" . $option . "<br>");
@@ -44,20 +59,34 @@ define('DB_PASSWORD','symbor97');
 		   }
 
 		   function AddSelectionQuestionItem($questionID, $title,  $options){
-   		   		print_r("<p> Selection </p>");
-		   }
+		   		print_r("<div class=Selection id=\"" . (string)$questionID . "\">");
+   		   		print_r("<p><b>" . $title ." (SELECT ALL THAT APPLY) </b></p> <ul class=\"Answers\">");
+   		   		foreach ($options as &$option){	 
+   		   			print_r("<input type=\"checkbox\" name=\"" . (string)$questionID . "[]\" value = \"" . (string)$option . "\">" . (string)$option . "<br>");
+   		   		}
+
+   		   		print_r("</ul></div>");
+   		   	}
 
 		   function AddTrueFalseQuestionItem($questionID, $title){
-   		   		print_r("<p> True False </p>");
+   				
+   				print_r("<div class=TrueFalse id=\"" . (string)$questionID . "\">");
+   		   		print_r("<p><b>" . $title ." (SELECT ALL THAT APPLY) </b></p> <ul class=\"Answers\">");
+   		   		print_r("<input type=\"radio\" name=\"" . (string)$questionID  . "\" " . "value=\"True\">True<br>");
+   		   		print_r("<input type=\"radio\" name=\"" . (string)$questionID  . "\" " . "value=\"False\">False<br>");
+	   			print_r("</ul></div>");
 		   }
 
 		   function AddAssignmentGroupingItem($head, $body){
-		   		print_r("<p> Grouping </p>");
+		   		print_r("<div class=AssignmentGroup>");
+		   		print_r("<h5>" . $head . "</h5>");
+		   		print_r("<p>". $body . "</p></div>");
 		   }
 
 
 		   function BuildLesson($xml, $content){
 		   		$dom = new DOMDocument;
+	   			$dom->preserveWhiteSpace = FALSE;
 				$dom->loadXML($xml);
 				$i = 0;
 
@@ -89,7 +118,7 @@ define('DB_PASSWORD','symbor97');
         			$ListItems = [];
         			$Explanation = "";
 
-        			foreach ($FigureExplanation->childNodes as $node){
+        			foreach ($List->childNodes as $node){
         				if($node->nodeName == "Header"){
         					$Header = $node->nodeValue;
         				}
@@ -109,12 +138,12 @@ define('DB_PASSWORD','symbor97');
         		}
 
 				$i = 0;
-		 		while(is_object($List = $dom->getElementsByTagName("FigCaption")->item($i))){
+		 		while(is_object($FigCaption = $dom->getElementsByTagName("FigCaption")->item($i))){
 					$ImgTitle = "";
         			$Explanation = "";
 
-        			foreach ($FigureExplanation->childNodes as $node){
-        				if($node->nodeName == "ImgTitle"){
+        			foreach ($FigCaption->childNodes as $node){
+        				if($node->nodeName == "IMGTitle"){
         					$ImgTitle = $node->nodeValue;
         				}
         				//This must be explanation
@@ -132,29 +161,31 @@ define('DB_PASSWORD','symbor97');
 
 		   function BuildQuiz($xml, $content){
 				$dom = new DOMDocument;
+				$dom->preserveWhiteSpace = FALSE;
 				$dom->loadXML($xml);
 				$id = 0;
 			    $i=0;
 
+			    unset($_SESSION['Answers']);
+
 				//Store all the answers in a session variable so we can use it for marking later
 				$allAnswers = [];
 				
+				print_r("<form method='post' class=\"Quiz\" action='CourseHelper.php'>");
+
         		while(is_object($multipleChoiceQuestion = $dom->getElementsByTagName("MultipleChoice")->item($i))){
-        			$title = "";
-        			$options = array();
+        			
+      				$title = "";
+        			$options = [];
 
         			foreach ($multipleChoiceQuestion->childNodes as $node){
+
         				if($node->nodeName == "QuestionTitle"){
         					$title = $node->nodeValue;
         				}
         				elseif($node->nodeName == "OptionList"){
-        					foreach($node->childNodes as $option){
-        						
-        						//Remove any whitespace nodes
-        						$tempStr = preg_replace('/\s+/', '', $option->nodeValue);
-        						if(strlen($tempStr) != 0){
-        							array_push($options, $option->nodeValue);
-        						}
+        					foreach($node->childNodes as $option){      				
+        							$options[] = $option->nodeValue;       					
         					}
         				}
         				//This has to be answer because we validate it using schema
@@ -174,12 +205,13 @@ define('DB_PASSWORD','symbor97');
         			$options = [];
         			$answer = "";
         			foreach ($selectionQuestion->childNodes as $node){
+        			
         				if($node->nodeName == "QuestionTitle"){
         					$title = $node->nodeValue;
         				}
         				elseif($node->nodeName == "OptionList"){
-        					foreach($node->childNodes as $option){
-        						$options[] = $option;
+        					foreach($node->childNodes as $option){    					
+        							$options[] = $option->nodeValue;    							
         					}
         				}
         				//This has to be answer because we validate it using schema
@@ -199,6 +231,7 @@ define('DB_PASSWORD','symbor97');
         			$options = [];
         			$answer = "";
         			foreach ($trueFalse->childNodes as $node){
+
         				if($node->nodeName == "QuestionTitle"){
         					$title = $node->nodeValue;
         				}
@@ -212,10 +245,14 @@ define('DB_PASSWORD','symbor97');
     				$id++;
         			$i++;
         		}
+
+        		$_SESSION['Answers'] = $allAnswers;
+        		print_r("	<div style=\"text-align:center;\"><button type=\"SubmitQuiz\" name=\"SubmitQuiz\">Submit Quiz</button></div>");
 		   }
 
 		   function BuildAssignment($xml, $content){
 				$dom = new DOMDocument;
+				$dom->preserveWhiteSpace = FALSE;
 				$dom->loadXML($xml);
 			    $i=0;
 
@@ -245,7 +282,7 @@ define('DB_PASSWORD','symbor97');
 		   	print_r("<h1> Class: " .  $_SESSION['Course'] . "</h1>" );
 		   	print_r("<h2> Unit: " .  $Unit . "</h2>" );
 		   	print_r("<h4> Material: " .  $Type . "</h4>");
-		   	print_r("<hr style=\"margin:0px\">");
+		   		print_r("<hr style=\"margin:0px\">");
 		   }
 
 		   	$course = $_SESSION['Course'];
@@ -292,8 +329,6 @@ define('DB_PASSWORD','symbor97');
 
 		   ?>
 		</header>
-
-		<hr style="margin:0px"> 
-
+		<hr style=\"margin:0px\">
 	</div>
 </body>

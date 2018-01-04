@@ -4,7 +4,7 @@
 
 	<FigureExplanation>
 		<Header>HTML Tags</Header>
-		<IMGTitle>IMG/htmlTags.png</IMGTitle>
+		<IMGTitle>htmlTags.png</IMGTitle>
 		<Explanation>
 			Most elements inside of HTML document have a start tag and end tag. The start tags are put inside of angle brackets and the end tag has a forward slash inside
 			of the angle bracket. The exception to this rule are void element that only have start tags but no end tags. An example of this is img tag. Attributes inside of these tags can be used to describe 
@@ -15,7 +15,7 @@
 
 	<FigureExplanation>
 		<Header>Floating Elements</Header>
-		<IMGTitle>IMG/FloatingElement.png</IMGTitle>
+		<IMGTitle>FloatingElement.png</IMGTitle>
 		<Explanation>
 					Floating an element allows you to put some content on a certain side of the screen and actually allow you to load content around that element. All the content that is not "floating" will simply load around the floating element. This specific square is a prime example of a floating image with text that loads around the content.
 		</Explanation>
@@ -57,11 +57,11 @@
 
 	<FigCaption>
 		<Explanation>These inputs do not require any additional code in order to ensure the user input is valid.</Explanation>
-		<IMGTitle>IMG/SelfValidatingInputs.png</IMGTitle>	
+		<IMGTitle>SelfValidatingInputs.png</IMGTitle>	
 	</FigCaption>
 
 	<FigCaption>
 		<Explanation>A list of common Multipurpose Internet Mail Extensions(MIMEs)</Explanation>
-		<IMGTitle>IMG/commonMIMETypes.png</IMGTitle>
+		<IMGTitle>commonMIMETypes.png</IMGTitle>
 	</FigCaption>
 </TutorialDetails> 

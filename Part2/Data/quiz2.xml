@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<QuizDetails>
+	
+	<MultipleChoice>
+		<QuestionTitle>The "==" operator is used for what operation?</QuestionTitle>
+		<OptionList>
+			<Option>Assignment</Option>
+			<Option>Comparison</Option>
+			<Option>Both assignment and comparison</Option>
+			<Option>None of the above</Option>
+		</OptionList>
+		<Answer>Comparison</Answer>
+	</MultipleChoice>
+
+	<MultipleChoice>
+		<QuestionTitle>Which is not a way to return from a function?</QuestionTitle>
+		<OptionList>
+			<Option>Reaching the end of a function</Option>
+			<Option>Executing a line with "Exit Function" statment</Option>
+			<Option>Executing a line with "Return" statment</Option>
+			<Option>Executing a line with "Return [Expression]" statment</Option>
+		</OptionList>
+		<Answer>Executing a line with "Exit Function" statment</Answer>
+	</MultipleChoice>
+
+	<MultipleChoice>
+		<QuestionTitle>The Dom model is best modelled as a?</QuestionTitle>
+		<OptionList>
+			<Option>Octopus</Option>
+			<Option>Tree</Option>
+			<Option>Map</Option>
+			<Option>Family</Option>
+		</OptionList>
+		<Answer>Tree</Answer>
+	</MultipleChoice>
+
+	<Selection>
+		<QuestionTitle>Select all operators that are matched with their correct JavaScript Operation?</QuestionTitle>
+		<OptionList>
+			<Option>+ | Addition</Option>
+			<Option>^ | Remainder</Option>
+			<Option>x | Multiplication</Option>
+			<Option>/ | Division</Option>
+		</OptionList>
+		<Answer>+ | Addition,/ | Division</Answer>
+	</Selection>
+
+	<Selection>
+		<QuestionTitle>Select all that are NOT JavaScript reserved words?</QuestionTitle>
+		<OptionList>
+			<Option>enum</Option>
+			<Option>cons</Option>
+			<Option>inherits</Option>
+			<Option>super</Option>
+			<Option>int</Option>
+		</OptionList>
+		<Answer>cons,inherits,int</Answer>
+	</Selection>
+
+	<TrueFalse>
+		<QuestionTitle>You can place javascript code at the top of an HTML file.</QuestionTitle>
+		<Answer>True</Answer>
+	</TrueFalse>
+
+	<TrueFalse>
+		<QuestionTitle>Every statement in JavaScript must be terminated with a semi-colon.</QuestionTitle>
+		<Answer>True</Answer>
+	</TrueFalse>
+
+	<TrueFalse>
+		<QuestionTitle>Arrays first element index is 1.</QuestionTitle>
+		<Answer>False</Answer>
+	</TrueFalse>
+
+	<TrueFalse>
+		<QuestionTitle>Arrays can dynamically reallocate memory when a value is assigned to an index that does not exist.</QuestionTitle>
+		<Answer>True</Answer>
+	</TrueFalse>
+
+	<TrueFalse>
+		<QuestionTitle>There are two ways to register an event Tradtitional and Online.</QuestionTitle>
+		<Answer>False</Answer>
+	</TrueFalse>
+
+</QuizDetails>

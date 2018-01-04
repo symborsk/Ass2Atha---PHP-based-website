@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<QuizDetails>
+	
+	<MultipleChoice>
+		<QuestionTitle>What type of transformation allows us to convert xml to text based document?</QuestionTitle>
+		<OptionList>
+			<Option>XLS</Option>
+			<Option>XLT</Option>
+			<Option>XSL</Option>
+			<Option>CON</Option>
+		</OptionList>
+		<Answer>XSL</Answer>
+	</MultipleChoice>
+
+	<MultipleChoice>
+		<QuestionTitle>What type of function do we utilize in Ajax to respond to successful retrieval of data?</QuestionTitle>
+		<OptionList>
+			<Option>Static</Option>
+			<Option>External</Option>
+			<Option>Callback</Option>
+			<Option>Private</Option>
+		</OptionList>
+		<Answer>Callback</Answer>
+	</MultipleChoice>
+
+	<MultipleChoice>
+		<QuestionTitle>What property tracks the request's progress of an XMLHttpRequest?</QuestionTitle>
+		<OptionList>
+			<Option>readyState</Option>
+			<Option>responseText</Option>
+			<Option>status</Option>
+			<Option>statusText</Option>
+		</OptionList>
+		<Answer>readyState</Answer>
+	</MultipleChoice>
+
+	<Selection>
+		<QuestionTitle>Select all the valid XML schema types?</QuestionTitle>
+		<OptionList>
+			<Option>string</Option>
+			<Option>bitmap</Option>
+			<Option>long</Option>
+			<Option>color</Option>
+			<Option>time</Option>
+		</OptionList>
+		<Answer>string,long,time</Answer>
+	</Selection>
+
+	<TrueFalse>
+		<QuestionTitle>XML Files are useful data structure but not easy for humans to read directly.</QuestionTitle>
+		<Answer>False</Answer>
+	</TrueFalse>
+
+	<TrueFalse>
+		<QuestionTitle>Start tags in xmls must have an assosiated end tag.</QuestionTitle>
+		<Answer>True</Answer>
+	</TrueFalse>
+
+	<TrueFalse>
+		<QuestionTitle>XMLs are case insensitive.</QuestionTitle>
+		<Answer>False</Answer>
+	</TrueFalse>
+
+	<TrueFalse>
+		<QuestionTitle>Date Schema requires the user to specify a timezone.</QuestionTitle>
+		<Answer>False</Answer>
+	</TrueFalse>
+
+	<TrueFalse>
+		<QuestionTitle>XML file must always have a schema.</QuestionTitle>
+		<Answer>False</Answer>
+	</TrueFalse>
+
+	<TrueFalse>
+		<QuestionTitle>Ajax uses asynchronous calls to improve user's experience.</QuestionTitle>
+		<Answer>True</Answer>
+	</TrueFalse>
+</QuizDetails>

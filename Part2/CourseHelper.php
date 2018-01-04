@@ -1,4 +1,18 @@
+
+
 <?php 
+	function convertArraysToCSV($post){
+		$tempArray = $post;
+		foreach($post as $key=>$value){
+			if(is_array($value)){
+				$stringOfArray = implode(",", $value);
+				$tempArray[$key]=$stringOfArray;
+			}
+		}
+
+		return $tempArray;
+	}
+
 	session_start();
 
 	define('DB_HOST', 'localhost');
@@ -31,6 +45,19 @@
 			$_SESSION['Error'] = "Invalid course password!";
 			header("Location: AcademicService.php");
 		}	
+	}
+	elseif(isset($_POST["SubmitQuiz"])){
+		$postConverted = convertArraysToCSV($_POST);
+		$resultDiff = array_diff($_SESSION['Answers'], $postConverted);
+		$count = count($_SESSION['Answers']);
+		$score = $count;
+
+		foreach($resultDiff as $key=>$value){
+			print_r("<p>question: " . $key . " Wrong! <br> Your Answer: " .  $postConverted[$key]  . "<br> Actual Answer:<b> " .$value .  "</b></p>" );
+			$score--;
+		}
+
+		print_r("<p>" . $score . " out of " . $count . "</p>");
 	}
 
 ?>

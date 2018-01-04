@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<TutorialDetails>
+
+	<FigureExplanation>
+		<Header>Javascript Files</Header>
+		<IMGTitle>javascriptInclude.png</IMGTitle>
+		<Explanation>
+			Javascript code can be placed at the top of an HTML file or can be included as a seperate file. Setting the script tag with a path attribute allows your html page to include a javascript file. This will allow you to use any calls in that javascript file in your html code.
+		</Explanation>
+	</FigureExplanation>
+
+	<FigureExplanation>
+		<Header>Arrays</Header>
+		<IMGTitle>arrays.png</IMGTitle>
+		<Explanation>
+			Just like other languages JavaScript has 0th index arrays which means the first element is element 0. Arrays always know their length and can be utilized using arrayname.length. Use the new expression to declare an array object in JavaScript. Javascript arrays will reallocate when a value is assigned to an index that does not exist in that current array. This can cause probles as elements in between the old last element of the array and new last element of the array are undefined.
+		</Explanation>
+	</FigureExplanation>
+
+	<FigureExplanation>
+		<Header>DOM Model/Tree</Header>
+		<IMGTitle>DomTree.png</IMGTitle>
+		<Explanation>
+			By using the document object you can navigate throughout the nodes in your html file. Speicifcally the getElementById method will get all the DOM nodes with that Id. The relationships within the Document is modelled by a tree with parent and child nodes. The html node is root node and is a parent of all the other elements. We can use the DOM to manipulate the HTML5 document dynamically. This gives us great additional functionality.
+		</Explanation>
+	</FigureExplanation>
+
+	<FigureExplanation>
+		<Header>Event Handling</Header>
+		<IMGTitle>EventProperties.png</IMGTitle>
+		<Explanation>
+			Event handling is neccessary to dynamically make the page react to a users input. You can register an event two ways Inline and Traditional. Inline involves setting and event as html attribute while traditional assigns the name of function to an actual DOM Node. Each event has some consistent properties that can be utilized to enable the programmer to better understand the characteristics around that specific event.
+		</Explanation>
+	</FigureExplanation>
+
+	<List>
+		<Header>Programming Tips for Javascript:</Header>
+		<ListItems>
+			<Item>Terminate every statement with a semi-colon this is used to let the computer know that your line in done</Item>
+			<Item>Javascript like many other languages is case sensitive</Item>
+			<Item>The interpreter often reports a syntax error not on the line it occurs, be sure to investigate carefully when fixing sytax errors</Item>
+			<Item>The "==" operator is used for comparison whilst the "=" operator is used for assignment</Item>
+			<Item>Indent your code at different levels, specifically each time you go into an if/for/while/switch be sure to indent to allow the statement to stand out from prior level</Item>
+		</ListItems>
+		<Explanation> These tips will help your javascript code to be easier to understand and less buggy.</Explanation>
+	</List>
+
+	<List>
+		<Header>Ways to return from a function:</Header>
+		<ListItems>
+			<Item>Reaching the end of the function</Item>
+			<Item>Executing a line with the "Return" statement</Item>
+			<Item>Excecuting a line with "Return [expression]" statment</Item>
+		</ListItems>
+		<Explanation> Not returning from a function that expects a return expression is a logic error.</Explanation>
+	</List>
+
+	<List>
+		<Header>Java Canvas has many drawing functionalities:</Header>
+		<ListItems>
+			<Item>Rectangles: using the fillRect method draw our rectangle using the x and y coordinates we specify</Item>
+			<Item>Lines: using the beginPath method and moveTo methods we can specify a start point and end point of a line in x and y coordinates</Item>
+			<Item>Arcs: usings the beginPath method along with the arc method we can draw circle and arcs</Item>
+			<Item>Shadows: first specify a shadowBlur, shadowOffsetX, shadowOffsetT and ShadowColor attribute we are able to create a customizable shadow.</Item>
+			<Item>Curves: there are available API calls for quadratic and bezier curves</Item>
+			<Item>Gradients: there are available API calls for linear and radial gradients</Item>
+			<Item>Images:  the drawImage method can be used to draw an image to a specific spot on the canvas with specific width and height speicfications</Item>
+			<Item>Patterns: The createPattern method can be used to display an image in a specific pattern.</Item>
+		</ListItems>
+		<Explanation> The canvas is a useful tool that can be used in different scenarios.</Explanation>
+	</List>
+
+	<FigCaption>
+		<Explanation>These are the operators used to perform arithmetic operations in javascript.</Explanation>
+		<IMGTitle>ArithmeticOperators.png</IMGTitle>	
+	</FigCaption>
+
+	<FigCaption>
+		<Explanation>These are reserved words that you may not use for variable names in JavaScript.</Explanation>
+		<IMGTitle>JavaScriptRes.png</IMGTitle>
+	</FigCaption>
+	
+</TutorialDetails>
+
+

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TutorialDetails>
+
+	<FigureExplanation>
+		<Header>XSL Tranformation</Header>
+		<IMGTitle>xslTran.png</IMGTitle>
+		<Explanation>
+			XSL transformations give us a way to directly convert any xml into a text based document. XSL style sheets can be directly connect to an XML file and transform xml data into the image seen here.
+		</Explanation>
+	</FigureExplanation>
+
+	<FigureExplanation>
+		<Header>Ajax Enabled Web Apps</Header>
+		<IMGTitle>ajax.png</IMGTitle>
+		<Explanation>
+			Ajax allows web applications to feel more like desktop application. Requests for data to the server are done using asynchronous calls. The page then performs partial updates in order to reduce the loading time when loading new information to the web page. As programmers we utilize callback functions to ensure that once the request is complete we proceed with processing the data.
+		</Explanation>
+	</FigureExplanation>
+
+	<FigureExplanation>
+		<Header>XML Files</Header>
+		<IMGTitle>xmlEx.png</IMGTitle>
+		<Explanation>
+			Xml documents allow us to store data in a way that people can easily read and computers can easily parse. We can use an xml parser to parse through a document and interpret the data and use it in whatever way we want. An XML document may reference a schema but it does not always. An xml file needs to be well formed for a parser to evaluate it.
+		</Explanation>
+	</FigureExplanation>
+
+	<List>
+		<Header>Programming Tips for Xmls:</Header>
+		<ListItems>
+			<Item>Any white spaces before the xml declaration will be evaluated as an error</Item>
+			<Item>Every start tag in an xml must have an end tag as well</Item>
+			<Item>XML just like JavaScript is case sensitive</Item>
+			<Item>No white spaces are allowed in an XML element name</Item>
+			<Item>Make sure to label your xml element with good understandable names</Item>
+		</ListItems>
+		<Explanation> These tips will ensure you are a proficient user of the XML file type.</Explanation>
+	</List>
+
+	<FigCaption>
+		<Explanation>Markup characters cannot be used directly in character data.</Explanation>
+		<IMGTitle>MarkupChar.png</IMGTitle>	
+	</FigCaption>
+
+	<FigCaption>
+		<Explanation>All of our XML Schema Types.</Explanation>
+		<IMGTitle>XMLSchemaTypes.png</IMGTitle>
+	</FigCaption>
+
+	<FigCaption>
+		<Explanation>An XMLHttpRequest that is used in raw ajax has following properties.</Explanation>
+		<IMGTitle>RequestProp.png</IMGTitle>
+	</FigCaption>
+
+</TutorialDetails>
+
+
+

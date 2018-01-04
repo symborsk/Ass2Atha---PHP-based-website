@@ -66,6 +66,7 @@ define('DB_PASSWORD','symbor97');
 >
 	<h1 id="MainTitle">Search For Assignments/Quizzes/Lessons</h1>
 	<h2 id="SubTitle">You will need to know the password for the course in order to access it!</h2>
+
 	<form method='post' class="embeddedForm" action='CourseHelper.php' >
 		<label><b>Course Selection</b></label>
 		<select class="courseList" id="courseList" name ="courseListSelection">		
