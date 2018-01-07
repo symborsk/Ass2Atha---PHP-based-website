@@ -110,7 +110,7 @@ session_start();
 	    Assignment 2 Part 1 - Bookmarking Server
 	    </h2> 
 	    <h3>
-	    John Symborski, 33339305 
+	    John Symborski, Student ID
 	    </h3>
 	</header>
 

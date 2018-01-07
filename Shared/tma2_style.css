@@ -72,6 +72,7 @@ p {
 .content {
 	margin-left:15%;
 	padding:10px;
+    color: #DFDCE3;
 }
 
 .mainWindow {
@@ -261,6 +262,7 @@ li a:hover {
     margin: 20px 10px;
     vertical-align: middle;
     margin: 20px 50px;
+    color:black;
 }
 
 .tutList, .AssignmentGroup{

@@ -30,29 +30,126 @@
 	    Advanced Technologies for Web-Based Systems
 	    </h2> 
 	    <h3>
-	    John Symborski, 33339305 
+	    John Symborski, Student ID
 	    </h3>
 	    <h4>
-	    Dec 12th 2017 - TBD  Hours Spent: TBD
+	    Dec 12th 2017 - Jan 07 2017  Hours Spent: 90 approx
 	    </h4>
 	</header>
 
 	<hr style="margin:0px">
 
 	<h1 style="text-align:center;">Assignment Two Documentation:</h1>
+	
+	<h2 style="text-align:center;">Navigation and login to my Website:</h2>
+	<p> Navigate to http://68.149.242.146/TMA2/tma2.htm, my computer that is running this is a bit older so it may be slowish. COMP466 inside Academic Service - Course Password: 123 Admin Password: 123. Bookmark Service a username to load if you don't want to make an account is U:john P:12345.</p>
+
+	<h2 style="text-align:center;">Schemas For Part 1 and Part 2</h2>
+	<h6>Login:</h6>
+	<table style="width:100%">
+		<tr>
+			<th>Username(PK)</th><th>Password</th>
+		</tr>
+	</table>
+	
+	<h6>Bookmarks:</h6>
+
+	<table style="width:100%">
+		<tr>
+			<th>Username(FK,PK)</th><th>Bookmark(PK)</th></tr>
+		</tr>
+	</table>
+
+	<h6>course_login:</h6>
+	<table style="width:100%">
+		<tr>
+			<th>courseName(FK,PK)</th><th>coursePassword</th><th>adminPassword</th>
+		</tr>
+	</table>
+
+
+	<h6>courses:</h6>
+	<table style="width:100%">
+		<tr>
+			<th>ID(PK, auto increment)</th><th>courseName(PK,FK)</th><th>CourseUnit</th>
+			<th>Type</th><th>xmlMarkup</th><th>contentPath</th>
+		</tr>
+	</table>
+
+	<hr style="margin:0px">
+
 	<h2 style="text-align:center;">Part 1:</h2>
 
-	<h6>Description:</h6>
-	<p>Create an XML that contain syour resume, create a XSLT document so you can render it in your webpage. There should be 3 files resume.xml, resume.xsd, resume.xsl.</p>
+	<h6>the original description and requirements of the project:</h6>
+	<p>This part of the assignment involved me getting introduced to PHP and MYSQL by designing a simple bookmark implementation on a webpage. This bookmark implementation should greet user with a list of top 10 most used web pages for bookmarks. Once logged in the user must be able to see his/her bookmarks. The link should open in new tab when the user clicks on a link.</p>
 
-	<h6>Interpretation: </h6>
-	<p> Put all my info into a xml and use xsl tranformation with a javascript file in order to display it similar to what it would be normally in a webpage.</p>
+	<h6>your analysis and design of the web application: </h6>
+	<p> This design was not very complex as we just needed a simple log_in table with a username and a password to track the users. We then used the username as a foreign key in the Bookmarks table which tracked the individual bookmarks. This made it super simple to query all of the user.</p>
 
-	<h6>Web Design: </h6>
-	<p>Create a visually appealing display of my resume.</p>
+	<h6>documentation of your implementation:</h6>
+	<p>	For some aspects of this I found using form with PHP post calls in order to handle a scenario. Other times I used javascript event with an ajax call that triggered PHP. This usually depended on the simplicity of the action. I used modal forms in order to minimize the number of pages for this simple task. I used the common phrase as mentioned in requirements as “Bookmarks are Us”.</p>
 
-	<h6>Documentation / User guide / Hyperlink</h6>
-	<p>No Documentation / User guide / Hyperlink needed simply just click "My Resume" on the navigation bar and view my resume.</p>   
+	<h6>a guide for users to set up, to run, and to use the web application:</h6>
+	<p>Please refer to accessing website section above to navigate to this website that will be hosted through a port on my computer at home. Please refer to login information if you want a to log into a user profile that made already for this part or next. This app simple allows a user to view the most popular bookmarks when they are not logged in. When they are logged in they can edit, delete add new bookmarks that will be stored in a database under their profile.</p>
+
+	<h6>a hyperlink to the web applications you design for the project:</h6>
+	<p>To get to this page from main website simply click on the Bookmark Service.</p>
+
+	<hr style="margin:0px">  
+
+	<h2 style="text-align:center;">Part 2:</h2>
+
+	<h6>the original description and requirements of the project:</h6>
+	<p>	This part of the assignment involved designing an online course management tool that would enable a SME to create a data file (XML) and upload it with whatever images it uses. The service then must allows student to access this data as a visually friendly webpage. The xml is suppose to be stored in the database and you will have to write a parser that takes the database row and converts it into a html page that will be displayed to user. This parser is to be written in PHP. Once these components are completed package this tool as user friendly webpage that allows teachers and students to upload and view content.</p>
+
+	<h6>your analysis and design of the web application: </h6>
+	<p> I wanted to allow 3 different types of uploads from the teacher perspective, Assignments, Lessons and Quizzes. In order to minimize the number of files stored on server side the Quizzes and Assignment are not uploaded it more of just an information placeholder. The Quizzes are marked however and correct answers are displayed to user when they submit. There is a schema defined for each file upload which prevents a user from uploading an invalid xml. I converted my assignment 1 XMLs for quiz and lessons into the format I thought more appropriate for assignment 2. These reside in the Part2/Data directory. They are just there so you can see the data structure when marking they are not actually used in app. There are two  data tables one for the course login information and one for the course information. Each course row represents either a Assignment, Quiz, or Lesson and it contain all the information my Php Parser needs to know in order to create the web page.  When a user uploads an xml they also can upload images that are stored on the server side in a content path that is stored in the database course information row. A course has an admin password and course password. The admin password and course Password are needed to upload file to a course but the course password is only needed to view the information. </p>
+
+	<h6>documentation of your implementation:</h6>
+	<p>	I tried to use as much PHP as possible for this assignment with minimal javascript. All the heavy lifting of this application is done through queries and php. Using two tables for this allowed me to not repeat login information for every single row as a course only has a single Admin Password and single Course Password. These passwords were put in place so a teacher can make available the information to student by simple giving them a password and still have the course integrity protected by having a Admin Password protecting the ability to upload.  </p>
+
+	<h6>a guide for users to set up, to run, and to use the web application:</h6>
+	<p>I already upload quiz 1, quiz 2, quiz 3, lesson 1, lesson 2, lesson 3, from assignment 1 under a Comp 466 course.  Login information is posted above. Using login information you can upload and view any of the course information. We stash a Session variable that tracks the last course you downloaded and from the 
+	"Last Course Loaded" page you can open any of the material for the course you just loaded.</p>
+
+	<h6>a hyperlink to the web applications you design for the project:</h6>
+	<p>To get to this page from main website simply click on the Academic Service.</p> 
+
+ 	<h2 style="text-align:center;">Educational Markup Language Guide:</h2>
+
+ 	<h6>Assignment:</h6>
+ 	<ul>
+ 		<li>Header: The header of a specific paragraph of information of the assignment.</li>
+ 		<li>Paragraph: The paragraph that goes with the header.</li>
+ 		<li>Grouping: A pair of header and paragraph that implements a single idea for the assignment</li>
+ 		<li>Assignment: The root node for this educational item.</li>
+ 	</ul>
+
+ 	<h6>Quiz:</h6>
+	 	 <ul>
+	 		<li>Question Title: The question that is proposed for a specific question.</li>
+	 		<li>Answer: The correct answer to the question title, matches text identically.</li>
+	 		<li>Option: The list of options for this question.</li>
+	 		<li>OptionList: contains all the options available for a specific question.</li>
+	 		<li>MultipleChoice: A type of question that has a title an option list and a single answer inside the answer tag.</li>
+			<li>Selection: A type of question that has question title option list and 1/many answers separated by "," inside the answer tag.</li>
+			<li>TrueFalse: A type of question with only a question title and answer. The answer must be either "True" or "False".</li>
+			<li>Quiz Details: Contains all the questions for the quiz, the root element.</li>
+	 	</ul>
+
+ 	<h6>Lesson:</h6>
+	 	<ul>
+	 		<li>Header: The header to appear in the section of tutorial.</li>
+	 		<li>IMGTitle: If an image is used this is the title of the image matched exactly so that the parser loads the correct image.</li>
+	 		<li>Explanation: A paragraph explaining a specific topic.</li>
+	 		<li>Item: A single item in a list item grouping.</li>
+	 		<li>ListItems: A grouping with a series of bullet points.</li>
+			<li>FigureExplanation: A grouping that has a Header, IMGTitle and Explanation. Simple Image with a long paragraph explanation.</li>
+			<li>List: A grouping that has Header, ListItems, and an Explanation. List with explanation underneath to almost be like a conclusion.</li>
+			<li>FigCaption: A grouping with only a short explanation and a IMGTitle.</li>
+			<li>TutorialDetails: Contatins all grouping in the lesson, the root element.</li>
+	 	</ul>
+
 </div>
 
 </body>

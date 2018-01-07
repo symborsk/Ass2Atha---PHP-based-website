@@ -48,13 +48,16 @@
 	}
 	elseif(isset($_POST["SubmitQuiz"])){
 		$postConverted = convertArraysToCSV($_POST);
-		$resultDiff = array_diff($_SESSION['Answers'], $postConverted);
 		$count = count($_SESSION['Answers']);
 		$score = $count;
 
-		foreach($resultDiff as $key=>$value){
-			print_r("<p>question: " . $key . " Wrong! <br> Your Answer: " .  $postConverted[$key]  . "<br> Actual Answer:<b> " .$value .  "</b></p>" );
-			$score--;
+		foreach($_SESSION['Answers'] as $key=>$value){
+			
+			if($value != $postConverted[$key]){
+				print_r("<p>question: " . $key . " Wrong! <br> Your Answer: " .  $postConverted[$key]  . "<br> Actual Answer:<b> " .$value .  "</b></p>" );
+				$score--;
+			}
+	
 		}
 
 		print_r("<p>" . $score . " out of " . $count . "</p>");
